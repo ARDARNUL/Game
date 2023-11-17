@@ -1,6 +1,9 @@
 const mineCountDiv = document.querySelector('#mineCount')
 const timerDiv = document.querySelector('#timer')
 const root = document.querySelector(".map")
+const score = document.querySelector("#score")
+const rule = document.querySelector("#rule")
+const trall = document.querySelector(".trall")
 
 const boardXSize = 9
 const boardYSize = 9
@@ -64,7 +67,6 @@ function createBoard() {
                 if (!item.isMine) {
                     item.innerText = item.weight
                     item.classList.add(classes[item.weight])
-    
                 }
                 else {
                     showAll()
@@ -80,8 +82,6 @@ window.addEventListener('contextmenu', e => {
     e.preventDefault()
 })
 
-
-
 function bindBoard() {
     arr.forEach((item, index) => {
         item.id = index
@@ -93,7 +93,15 @@ function bindBoard() {
     })
 
     mineCountDiv.innerHTML =`Пехотинцев: ${mineCount}`
-    // time - (x*y - mineCount) * mineCount /100
+    score.innerHTML = `${Math.floor((second+minute)-(9*9 - mineCount)*(mineCount /100))}: Очков`
+    rule.innerHTML = `Правила`
+    rule.addEventListener('click', e =>{
+        if(e.button === 0){
+            trall.classList.add("trall")
+            trall.classList.toggle("hidden")
+            return
+        }
+    })
 }
 
 function calc() {
@@ -146,62 +154,60 @@ function calc() {
         if (col < boardXSize - 1) {
             item.weight += arr[index + 1].isMine ? 1 : 0
         }
+        
     }
 }
 
 function showAll() {
     arr.forEach((item) => {
-        if (!item.isMine) {
-            item.innerText = item.weight
-            item.classList.add(classes[item.weight])
-        } else {
+        if (item.isMine) {
             item.innerText = "x"
             item.classList.add("mine")
-        }
+        } 
     })
 }
 
-// function showCloud(index) {
-//     const col = index % boardXSize
-//     const row = Math.floor(index / boardYSize)
+function showCloud(index) {
+    const col = index % boardXSize
+    const row = Math.floor(index / boardYSize)
 
-//     const item = arr[index]
+    const item = arr[index]
 
-//     console.log(item, index);
+    console.log(item, index);
 
-//     if (item.weight === 0) {
-//         item.innerText = item.weight
-//         item.classList.add(classes[item.weight])
-//     }
+    if (item.weight === 0) {
+        item.innerText = item.weight
+        item.classList.add(classes[item.weight])
+    }
 
-//     if (item.weight !== 0) {
-//         item.innerText = item.weight
-//         item.classList.add(classes[item.weight])
-//         return
-//     }
+    if (item.weight !== 0) {
+        item.innerText = item.weight
+        item.classList.add(classes[item.weight])
+        return
+    }
 
-//     // console.log(arr[index - boardXSize].weight);
+    // top
+    if (row > 0 && arr[index - boardXSize].weight === 0) {
+        showCloud(index - boardXSize)
+    }
 
-//     // top
-//     if (row > 0 && arr[index - boardXSize].weight === 0) {
-//         showCloud(index - boardXSize)
-//     }
+    // left
+    if (col > 0 && arr[index - 1].weight === 0) {
+        showCloud(index - 1)
+    }
 
-//     // left
-//     if (col > 0 && arr[index - 1].weight === 0) {
-//         showCloud(index - 1)
-//     }
+    // bottom
+    if (row < boardYSize - 1 && arr[index + boardXSize].weight === 0) {
+        showCloud(index + boardXSize)
+    }
 
-//     // // bottom
-//     // if (row < boardYSize - 1 && arr[index + boardXSize].weight === 0) {
-//     //     showCloud(index + boardXSize)
-//     // }
+    // right
+    if (col < boardXSize - 1 && arr[index + 1].weight === 0) {
+        showCloud(index + 1)
+    }
 
-//     // // right
-//     // if (col < boardXSize - 1 && arr[index + 1].weight === 0) {
-//     //     showCloud(index + 1)
-//     // }
-// }
+   return
+}
 
 createBoard();
 
