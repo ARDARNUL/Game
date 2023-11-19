@@ -1,0 +1,50 @@
+.section,
+.section0,
+.section1,
+.section2,
+.section3,
+.section4,
+.section5,
+.section6,
+.section7,
+.section8 {
+    width: 75px;
+    height: 75px;
+    background-image: url("../img/kyst.png");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+}
+.section0 {
+    background-image: url("../img/clearkyst.png");
+    color:white;
+}
+.section1 {
+    background-image: url("../img/clearkyst.png");
+    color:white;
+}
+.section2 {
+    background-image: url("../img/clearkyst.png");
+    color:white;
+}
+.section3 {
+    background-image: url("../img/clearkyst.png");
+    color:white;
+}
+.section4 {
+    background-image: url("../img/clearkyst.png");
+    color:white;
+}
+.section5 {
+    background-image: url("../img/clearkyst.png");
+    color:white;
+}
+.section6 {
+    background-image: url("../img/clearkyst.png");
+    color:white;
+}
+.section7 {
+    background-image: url("../img/clearkyst.png");
+    color:white;
+}

@@ -1,0 +1,28 @@
+#newGame{
+    display: inline;
+    position: absolute;
+    right: 40px;
+    top: 192px;
+    width: 451px;
+    height: 63px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color:#FFB800;
+    cursor: pointer;
+}
+
+#name{
+    display: inline;
+    position: absolute;
+    right: 40px;
+    top: 310px;
+    width: 451px;
+    height: 63px;
+    background-color: white;
+}
+
+#target{
+    
+}

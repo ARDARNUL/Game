@@ -1,0 +1,63 @@
+.nav{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    bottom: 20px;
+}
+
+#mineCount{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color:#FFB800;
+    width: 100%;
+    background-image: url("../img/menu.png");
+    height: 39px;
+}
+
+#timer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color:#FFB800;
+    background-image: url("../img/menu.png");
+    height: 39px;
+}
+
+#score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color:#FFB800;
+    background-image: url("../img/menu.png");
+    height: 39px;
+}
+
+#rule{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color:#FFB800;
+    width: 100%;
+    background-image: url("../img/menu.png");
+    height: 39px;
+}
+
+.trall{
+    width: 100%;
+    height: 200px;
+    background-image: url("../img/trall.png");
+    font-size: 25px;
+    color: white;
+}

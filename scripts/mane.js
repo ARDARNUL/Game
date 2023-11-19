@@ -1,9 +1,13 @@
+const newGame = document.querySelector("#newGame")
 const mineCountDiv = document.querySelector('#mineCount')
 const timerDiv = document.querySelector('#timer')
 const root = document.querySelector(".map")
 const score = document.querySelector("#score")
 const rule = document.querySelector("#rule")
 const trall = document.querySelector(".trall")
+const nav = document.querySelector(".nav")
+const map = document.querySelector(".map")
+
 
 const boardXSize = 9
 const boardYSize = 9
@@ -40,9 +44,6 @@ function myCallback(){
     }
     timerDiv.innerHTML = `${minute.toString().padStart(2,'0')}:${second.toString().padStart(2,'0')}`
 }
-myCallback();
-
-const timer = setInterval(myCallback, 1000)
 
 function createBoard() {
 
@@ -73,7 +74,7 @@ function createBoard() {
                 }
             }
         })
-
+        
         arr.push(item)
     }
 }
@@ -154,14 +155,13 @@ function calc() {
         if (col < boardXSize - 1) {
             item.weight += arr[index + 1].isMine ? 1 : 0
         }
-        
     }
 }
 
 function showAll() {
     arr.forEach((item) => {
         if (item.isMine) {
-            item.innerText = "x"
+            item.classList.remove("section")
             item.classList.add("mine")
         } 
     })
@@ -186,31 +186,66 @@ function showCloud(index) {
         return
     }
 
-    // top
-    if (row > 0 && arr[index - boardXSize].weight === 0) {
-        showCloud(index - boardXSize)
-    }
+        // top
+        if (row > 0) { 
+                item.weight += arr[index - boardXSize] == 0 ? 1 : 0
+            // top-left
+            if (col > 0) {
+                item.weight += arr[index - boardXSize - 1] == 0 ? 1 : 0
+            }
 
-    // left
-    if (col > 0 && arr[index - 1].weight === 0) {
-        showCloud(index - 1)
-    }
+            // top-right
+            if (col < boardXSize - 1) {
+                item.weight += arr[index - boardXSize + 1] == 0 ? 1 : 0
+            }
+        }
 
-    // bottom
-    if (row < boardYSize - 1 && arr[index + boardXSize].weight === 0) {
-        showCloud(index + boardXSize)
-    }
+        // left
+        if (col > 0) {
+            item.weight += arr[index - 1] == 0 ? 1 : 0
+        }
 
-    // right
-    if (col < boardXSize - 1 && arr[index + 1].weight === 0) {
-        showCloud(index + 1)
-    }
+        // bottom
+        if (row < boardYSize - 1) {
+            item.weight += arr[index + boardXSize] == 0 ? 1 : 0
 
-   return
+            // bottom-left
+            if (col > 0) {
+                item.weight += arr[index + boardXSize - 1] == 0 ? 1 : 0
+            }
+
+            // bottom-right
+            if (col < boardXSize - 1) {
+                item.weight += arr[index + boardXSize + 1] == 0 ? 1 : 0
+            }
+        }
+
+        // right
+        if (col < boardXSize - 1) {
+            item.weight += arr[index + 1] == 0 ? 1 : 0
+        }
 }
 
-createBoard();
+newGame.innerHTML = `Новая игра`
 
-calc();
+newGame.addEventListener('click', e =>{
+    if(e.button === 0){
+        createBoard();
 
-bindBoard();
+        calc();
+
+        bindBoard();
+
+        myCallback();
+
+        nav.classList.remove("hidden")
+        map.classList.remove("hidden")
+    }
+})
+
+// map.addEventListener('click', e =>{
+//     if(e.button === 0){
+//     }
+// })
+
+// const timer = setInterval(myCallback, 1000)
