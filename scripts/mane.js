@@ -1,13 +1,12 @@
 const newGame = document.querySelector("#newGame")
 const mineCountDiv = document.querySelector('#mineCount')
 const timerDiv = document.querySelector('#timer')
-const root = document.querySelector(".map")
 const score = document.querySelector("#score")
 const rule = document.querySelector("#rule")
 const trall = document.querySelector(".trall")
 const nav = document.querySelector(".nav")
 const map = document.querySelector(".map")
-
+const container = document.querySelector(".container")
 
 const boardXSize = 9
 const boardYSize = 9
@@ -24,7 +23,7 @@ const classes = {
     8: "section8",
 }
 
-const arr = []
+let arr = []
 
 let mineCount = 0
 let second = 60
@@ -46,19 +45,21 @@ function myCallback(){
 }
 
 function createBoard() {
-
+    if(arr.length >= 81){
+        arr = []
+    }
     for (let index = 0; index < boardXSize * boardYSize; index++) {
         const item = document.createElement('div')
 
         const isMine = Math.random() >= 0.85
-        item.className = "section"
+        item.classList.add("section")
         item.isMine = isMine
         item.weight = 0
 
         item.addEventListener('mousedown', e =>{
             if (e.button === 2) {
-                 if(item.className == "section" || item.className == "section flag"){
-                item.classList.toggle("flag")
+                 if(item.contains(section) || item.className == "section flag"){
+                    item.classList.toggle("flag")
                 return
                 }
             } else if (e.button === 0) {
@@ -90,7 +91,7 @@ function bindBoard() {
             mineCount++
         }
 
-        root.appendChild(item)
+        map.appendChild(item)
     })
 
     mineCountDiv.innerHTML =`Пехотинцев: ${mineCount}`
@@ -228,10 +229,14 @@ function showCloud(index) {
 
 newGame.innerHTML = `Новая игра`
 
+
 newGame.addEventListener('click', e =>{
     if(e.button === 0){
-        createBoard();
 
+        newMap();
+
+        createBoard();
+        
         calc();
 
         bindBoard();
@@ -240,12 +245,39 @@ newGame.addEventListener('click', e =>{
 
         nav.classList.remove("hidden")
         map.classList.remove("hidden")
+        
     }
 })
 
-// map.addEventListener('click', e =>{
-//     if(e.button === 0){
-//     }
-// })
+// newGame.removeEventListener("click")
 
-// const timer = setInterval(myCallback, 1000)
+function newMap(){
+    console.log(map);
+
+    if (map.children.length !== 0) {
+        // console.log(map.children.length === 0);
+        console.log(arr);
+        while(map.lastElementChild){
+            map.removeChild(map.lastElementChild);
+            // console.log(map.lastChild)
+        }
+    } else {
+        // console.log(map.children.length === 0);
+        // console.log(map.children);
+        // console.log(map.querySelectorAll('.section'));
+    }
+}
+
+
+map.addEventListener('mousedown', e =>{
+    if(e.button === 0){
+        const timer = setInterval(myCallback, 1000)
+        
+    }
+
+    if(e.button === 2){
+        const timer = setInterval(myCallback, 1000)
+    }
+
+})
+

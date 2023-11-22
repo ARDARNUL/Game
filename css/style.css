@@ -9,6 +9,7 @@ body {
     flex-direction: column;
     height: 100vh;
     background-image: url("../img/Background.png");
+    background-repeat: no-repeat;
 }
 
 .container{
