@@ -241,8 +241,6 @@ newGame.addEventListener('click', e =>{
 
         bindBoard();
 
-        myCallback();
-
         nav.classList.remove("hidden")
         map.classList.remove("hidden")
         
@@ -253,21 +251,16 @@ newGame.addEventListener('click', e =>{
 
 function newMap(){
     console.log(map);
-
+        mineCount = 0
     if (map.children.length !== 0) {
-        // console.log(map.children.length === 0);
         console.log(arr);
         while(map.lastElementChild){
             map.removeChild(map.lastElementChild);
-            // console.log(map.lastChild)
         }
+        
     } else {
-        // console.log(map.children.length === 0);
-        // console.log(map.children);
-        // console.log(map.querySelectorAll('.section'));
     }
 }
-
 
 map.addEventListener('mousedown', e =>{
     if(e.button === 0){
