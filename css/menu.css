@@ -13,16 +13,34 @@
     cursor: pointer;
 }
 
-#name{
+#newGameNoneName{
     display: inline;
     position: absolute;
     right: 40px;
-    top: 310px;
+    top: 192px;
     width: 451px;
     height: 63px;
-    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color:gray;
+    cursor: pointer;
 }
 
-#target{
-    
+#name{
+    display: inline;
+    position: absolute;
+    right: 60px;
+    top: 310px;
+    width: 425px;
+    height: 63px;
+    color: #FFB800;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    border: none;
+    outline: none;
 }

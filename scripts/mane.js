@@ -1,4 +1,5 @@
 const newGame = document.querySelector("#newGame")
+const newGameNoName = document.querySelector("#newGameNoneName")
 const mineCountDiv = document.querySelector('#mineCount')
 const timerDiv = document.querySelector('#timer')
 const score = document.querySelector("#score")
@@ -7,9 +8,21 @@ const trall = document.querySelector(".trall")
 const nav = document.querySelector(".nav")
 const map = document.querySelector(".map")
 const container = document.querySelector(".container")
+const input = document.querySelector("#name")
 
 const boardXSize = 9
 const boardYSize = 9
+
+function checkName(){
+    check.addEventListener('')
+    if(input.value.trim().length > 0){
+        newGameNoName.id = "newGame"
+        newGameNoName.remove.id = "newGameNoName"
+    }
+
+}
+
+checkName();
 
 const classes = {
     0: "section0",
@@ -58,7 +71,7 @@ function createBoard() {
 
         item.addEventListener('mousedown', e =>{
             if (e.button === 2) {
-                 if(item.contains(section) || item.className == "section flag"){
+                 if(item.className == "section" || item.className == "section flag"){
                     item.classList.toggle("flag")
                 return
                 }
@@ -227,11 +240,43 @@ function showCloud(index) {
         }
 }
 
-newGame.innerHTML = `Новая игра`
 
+let test = false
 
+map.addEventListener('mousedown', e =>{
+    if(test == true){
+        return
+    }
+    if(e.button === 0 && test == false){
+        const timer = setInterval(myCallback, 1000)
+        test = true
+        myCallback()
+    }
+
+    if(e.button === 2 && test == false){
+        const timer = setInterval(myCallback, 1000)
+        test = true
+        myCallback()
+    }
+
+})
+
+function newMap(){
+    mineCount = 0
+    second = 60
+    minute = 59
+    if (map.children.length !== 0) {
+        while(map.lastElementChild){
+            map.removeChild(map.lastElementChild);
+        }
+        
+    } else {
+    }
+}
+
+if(newGame){
 newGame.addEventListener('click', e =>{
-    if(e.button === 0){
+    if(e.button === 0 && document.getElementById("newGame")){
 
         newMap();
 
@@ -243,34 +288,6 @@ newGame.addEventListener('click', e =>{
 
         nav.classList.remove("hidden")
         map.classList.remove("hidden")
-        
     }
 })
-
-// newGame.removeEventListener("click")
-
-function newMap(){
-    console.log(map);
-        mineCount = 0
-    if (map.children.length !== 0) {
-        console.log(arr);
-        while(map.lastElementChild){
-            map.removeChild(map.lastElementChild);
-        }
-        
-    } else {
-    }
 }
-
-map.addEventListener('mousedown', e =>{
-    if(e.button === 0){
-        const timer = setInterval(myCallback, 1000)
-        
-    }
-
-    if(e.button === 2){
-        const timer = setInterval(myCallback, 1000)
-    }
-
-})
-
