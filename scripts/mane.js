@@ -13,17 +13,6 @@ const input = document.querySelector("#name")
 const boardXSize = 9
 const boardYSize = 9
 
-function checkName(){
-    check.addEventListener('')
-    if(input.value.trim().length > 0){
-        newGameNoName.id = "newGame"
-        newGameNoName.remove.id = "newGameNoName"
-    }
-
-}
-
-checkName();
-
 const classes = {
     0: "section0",
     1: "section1",
@@ -110,13 +99,6 @@ function bindBoard() {
     mineCountDiv.innerHTML =`Пехотинцев: ${mineCount}`
     score.innerHTML = `${Math.floor((second+minute)-(9*9 - mineCount)*(mineCount /100))}: Очков`
     rule.innerHTML = `Правила`
-    rule.addEventListener('click', e =>{
-        if(e.button === 0){
-            trall.classList.add("trall")
-            trall.classList.toggle("hidden")
-            return
-        }
-    })
 }
 
 function calc() {
@@ -176,8 +158,8 @@ function showAll() {
     arr.forEach((item) => {
         if (item.isMine) {
             item.classList.remove("section")
-            item.classList.add("mine")
-        } 
+            item.classList.add("mine")          
+        }
     })
 }
 
@@ -199,48 +181,9 @@ function showCloud(index) {
         item.classList.add(classes[item.weight])
         return
     }
-
-        // top
-        if (row > 0) { 
-                item.weight += arr[index - boardXSize] == 0 ? 1 : 0
-            // top-left
-            if (col > 0) {
-                item.weight += arr[index - boardXSize - 1] == 0 ? 1 : 0
-            }
-
-            // top-right
-            if (col < boardXSize - 1) {
-                item.weight += arr[index - boardXSize + 1] == 0 ? 1 : 0
-            }
-        }
-
-        // left
-        if (col > 0) {
-            item.weight += arr[index - 1] == 0 ? 1 : 0
-        }
-
-        // bottom
-        if (row < boardYSize - 1) {
-            item.weight += arr[index + boardXSize] == 0 ? 1 : 0
-
-            // bottom-left
-            if (col > 0) {
-                item.weight += arr[index + boardXSize - 1] == 0 ? 1 : 0
-            }
-
-            // bottom-right
-            if (col < boardXSize - 1) {
-                item.weight += arr[index + boardXSize + 1] == 0 ? 1 : 0
-            }
-        }
-
-        // right
-        if (col < boardXSize - 1) {
-            item.weight += arr[index + 1] == 0 ? 1 : 0
-        }
 }
 
-
+let timer
 let test = false
 
 map.addEventListener('mousedown', e =>{
@@ -248,13 +191,13 @@ map.addEventListener('mousedown', e =>{
         return
     }
     if(e.button === 0 && test == false){
-        const timer = setInterval(myCallback, 1000)
+        timer = setInterval(myCallback, 1000)
         test = true
         myCallback()
     }
 
     if(e.button === 2 && test == false){
-        const timer = setInterval(myCallback, 1000)
+        timer = setInterval(myCallback, 1000)
         test = true
         myCallback()
     }
@@ -262,6 +205,10 @@ map.addEventListener('mousedown', e =>{
 })
 
 function newMap(){
+    if(test == true){
+        clearInterval(timer)
+        test = false
+    }
     mineCount = 0
     second = 60
     minute = 59
@@ -269,25 +216,38 @@ function newMap(){
         while(map.lastElementChild){
             map.removeChild(map.lastElementChild);
         }
-        
+    
     } else {
     }
 }
 
-if(newGame){
-newGame.addEventListener('click', e =>{
-    if(e.button === 0 && document.getElementById("newGame")){
+input.addEventListener('input', function(e) {
 
-        newMap();
+    newGameNoName.id = "newGame"
 
-        createBoard();
-        
-        calc();
+    newGameNoName.remove.id = "newGameNoName"
 
-        bindBoard();
+    newGameNoName.addEventListener('click', e =>{
+        if(e.button === 0 && document.getElementById("newGame")){
+    
+            newMap();
+    
+            createBoard();
+            
+            calc();
+    
+            bindBoard();
+    
+            nav.classList.remove("hidden")
+            map.classList.remove("hidden")
+        }
+    })
+    
+})
 
-        nav.classList.remove("hidden")
-        map.classList.remove("hidden")
+rule.addEventListener('click', e =>{
+    if(e.button === 0){
+        trall.classList.toggle("hidden")
+        return
     }
 })
-}

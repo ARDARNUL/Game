@@ -6,6 +6,17 @@
     background-image: url("../img/backgroundmap.png");
 }
 
+.end{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+    color: #FFB800;
+    font-size: 50PX;
+}
+
 .flag{
     background-image: url("../img/flag.png");
 }
