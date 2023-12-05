@@ -1,0 +1,17 @@
+.end{
+    position: absolute;
+    left: 650px;
+    top: 150px;
+    width: 606px;
+    height: 403px;
+    background-image: url("../img/end.png");
+}
+
+.win{
+    position: absolute;
+    left: 650px;
+    top: 150px;
+    width: 606px;
+    height: 403px;
+    background-image: url("../img/win.png");
+}

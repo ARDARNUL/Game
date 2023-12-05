@@ -9,6 +9,9 @@ const nav = document.querySelector(".nav")
 const map = document.querySelector(".map")
 const container = document.querySelector(".container")
 const input = document.querySelector("#name")
+const end = document.querySelector(".ending")
+const win = document.querySelector(".winning")
+// const clear = 
 
 const boardXSize = 9
 const boardYSize = 9
@@ -151,14 +154,26 @@ function calc() {
         if (col < boardXSize - 1) {
             item.weight += arr[index + 1].isMine ? 1 : 0
         }
+         
     }
 }
 
 function showAll() {
     arr.forEach((item) => {
+        let win = 81 - mineCount
+
+        if(arr.forEach(item => console.dir(item))){
+            alert("LOX")
+        }
+
+
+
         if (item.isMine) {
             item.classList.remove("section")
-            item.classList.add("mine")          
+            item.classList.add("mine")
+            end.classList.remove("hidden")
+            end.classList.add("end")
+            end.classList.remove("ending")          
         }
     })
 }
@@ -240,6 +255,9 @@ input.addEventListener('input', function(e) {
     
             nav.classList.remove("hidden")
             map.classList.remove("hidden")
+            end.classList.add("hidden")
+            end.classList.remove("end")
+            end.classList.add("ending")    
         }
     })
     
